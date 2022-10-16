@@ -1,0 +1,36 @@
+{
+    "name": "@nrpc/client",
+    "version": "1.0.0",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc --watch"
+    },
+    "peerDependencies": {
+        "@nrpc/server": "1.0.0"
+    },
+    "devDependencies": {
+        "@citizenfx/client": "^2.0.5914-1",
+        "typescript": "^4.8.4"
+    },
+    "main": "./dist/client/src/index.js",
+    "types": "./dist/client/src/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/client/src/index.js",
+            "types": "./dist/client/src/index.d.ts"
+        },
+        "./controller": {
+            "import": "./dist/client/src/controller.js",
+            "types": "./dist/client/src/controller.d.ts"
+        },
+        "./proxy": {
+            "import": "./dist/client/src/proxy.js",
+            "types": "./dist/client/src/proxy.d.ts"
+        },
+        "./shared/ControllerTypes": {
+            "import": "./dist/shared/ControllerTypes.js",
+            "types": "./dist/shared/ControllerTypes.d.ts"
+        }
+    }
+}
