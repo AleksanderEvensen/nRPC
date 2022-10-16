@@ -79,3 +79,6 @@ console.log(await proxy.Ping()) // Pong!
 - The <code>any</code> type can't be used as the parameter type, because of the way zero-parameter callbacks works
 
 - The functions needs to be wrapped in the <code>event()</code> function <br> <img src="./images/event-wrap.png" width="50%">
+
+## Contributing
+Any contributions are happily welcomed. This package was made with my small amount of TypeScript typing knowledge that i had at the time and any help with either trimming down the list of caveats or improvements to the source code is gladly accepted
