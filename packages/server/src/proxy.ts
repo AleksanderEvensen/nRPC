@@ -1,5 +1,5 @@
 import type { EventController } from "./controller";
-import { uuidv4 } from "../../shared/utils";
+import { IfEquals, uuidv4 } from "../../shared/utils";
 
 const eventPromises: Map<string, { response: (input: unknown) => void; reject: (error: unknown) => void }> = new Map();
 
@@ -14,7 +14,14 @@ onNet("__internal_server-nrpc-error", function (uuid: string, error: unknown) {
 
 export function createServerEventProxy<T extends EventController>(namespace: string) {
     type ServerEventProxy = {
-        [TEvent in keyof T]: (playerSrc: number) => (input: T[TEvent]["paramType"]) => Promise<T[TEvent]["returnType"]>;
+        [TEvent in keyof T]: (
+            playerSrc: number
+        ) => IfEquals<
+            T[TEvent]["paramType"],
+            any,
+            () => Promise<T[TEvent]["returnType"]>,
+            (input: T[TEvent]["paramType"]) => Promise<T[TEvent]["returnType"]>
+        >;
     };
 
     const proxy = new Proxy(

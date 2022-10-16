@@ -8,8 +8,8 @@ interface IServerControllerOptions {
 export function event<T1 = any, T2 = any>(callback: SupportedFunctions<T1, T2>) {
     return {
         // These are only placeholders
-        paramType: undefined,
-        returnType: undefined,
+        paramType: null,
+        returnType: null,
 
         callback,
     } as EventDefinition<T1, T2>;
@@ -20,7 +20,7 @@ export function createEventController(options: IServerControllerOptions) {
         Object.entries(events).forEach(([eventName, eventDef]) => {
             onNet(
                 `__internal_server-nrpc-${options.namespace}-${eventName}`,
-                async function (input: unknown, callerUuid: string) {
+                async function (input: any, callerUuid: string) {
                     const _src = +globalThis.source;
                     try {
                         const result = await eventDef.callback(input);

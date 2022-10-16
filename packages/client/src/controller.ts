@@ -8,8 +8,8 @@ interface IClientControllerOptions {
 export function event<T1 = any, T2 = any>(callback: SupportedFunctions<T1, T2>) {
     return {
         // These are only placeholders
-        paramType: undefined,
-        returnType: undefined,
+        paramType: null,
+        returnType: null,
 
         callback,
     } as EventDefinition<T1, T2>;
@@ -20,7 +20,7 @@ export function createEventController(options: IClientControllerOptions) {
         Object.entries(events).forEach(([eventName, eventDef]) => {
             onNet(
                 `__internal_client-nrpc-${options.namespace}-${eventName}`,
-                async function (input: unknown, callerUuid: string) {
+                async function (input: any, callerUuid: string) {
                     try {
                         const result = await eventDef.callback(input);
                         emitNet(`__internal_server-nrpc-success`, callerUuid, result);

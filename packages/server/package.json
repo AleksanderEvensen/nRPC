@@ -1,7 +1,6 @@
 {
     "name": "@nrpc/server",
     "version": "1.0.0",
-    "main": "index.js",
     "license": "MIT",
     "scripts": {
         "build": "tsc",
@@ -14,6 +13,8 @@
         "@citizenfx/server": "^2.0.5914-1",
         "typescript": "^4.8.4"
     },
+    "main": "./dist/server/src/index.js",
+    "types": "./dist/server/src/index.d.ts",
     "exports": {
         ".": {
             "import": "./dist/server/src/index.js",
