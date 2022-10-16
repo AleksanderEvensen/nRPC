@@ -11,74 +11,85 @@
   </figure>
 </div>
 
+### Installation
+
+```sh
+# NPM
+npm install --save @nrpc/client @nrpc/server
+
+# Yarn
+yarn add @nrpc/server @nrpc/client
+
+# PNPM
+pnpm add @nrpc/server @nrpc/client
+```
 
 ## Calling functions on the client from the server
 
 `client.ts`
+
 ```ts
 import { createEventController, event } from "@nrpc/client";
 
 function Ping() {
-	return "Pong!"
+    return "Pong!";
 }
 
 const controller = createEventController({ namespace: "<name_space_name>" })({
-	Ping: event(Ping)
+    Ping: event(Ping),
 });
 
 export type ClientController = typeof controller;
-
 ```
 
 `server.ts`
+
 ```ts
 import { createServerEventProxy } from "@nrpc/server";
 import type { ClientController } from "./client";
 
 const proxy = createServerEventProxy<ClientController>("<name_space_name>");
 
-console.log(await proxy.Ping(playerSrc)()) // Pong!
+console.log(await proxy.Ping(playerSrc)()); // Pong!
 ```
 
 ## Calling functions on the server from the client
 
 `server.ts`
+
 ```ts
 import { createEventController, event } from "@nrpc/server";
 
 function Ping() {
-	return "Pong!"
+    return "Pong!";
 }
 
 const controller = createEventController({ namespace: "<name_space_name>" })({
-	Ping: event(Ping)
+    Ping: event(Ping),
 });
 
 export type ServerController = typeof controller;
-
 ```
 
 `client.ts`
+
 ```ts
 import { createClientEventProxy } from "@nrpc/server";
 import type { ServerController } from "./server";
 
 const proxy = createServerEventProxy<ClientController>("<name_space_name>");
 
-console.log(await proxy.Ping()) // Pong!
+console.log(await proxy.Ping()); // Pong!
 ```
 
-
-
-
-
-
 ## Caveats
-- Functions can only have one parameter, so if more is needed then a object should do the trick <br> <img src="./images/oneparam.png" width="50%">
 
-- The <code>any</code> type can't be used as the parameter type, because of the way zero-parameter callbacks works
+-   Functions can only have one parameter, so if more is needed then a object should do the trick <br> <img src="./images/oneparam.png" width="50%">
 
-- The functions needs to be wrapped in the <code>event()</code> function <br> <img src="./images/event-wrap.png" width="50%">
+-   The <code>any</code> type can't be used as the parameter type, because of the way zero-parameter callbacks works
+
+-   The functions needs to be wrapped in the <code>event()</code> function <br> <img src="./images/event-wrap.png" width="50%">
 
 ## Contributing
+
 Any contributions are happily welcomed. This package was made with my small amount of TypeScript typing knowledge that i had at the time and any help with either trimming down the list of caveats or improvements to the source code is gladly accepted
