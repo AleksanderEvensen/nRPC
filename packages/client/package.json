@@ -2,6 +2,13 @@
     "name": "@nrpc/client",
     "version": "1.0.0",
     "license": "MIT",
+    "private": false,
+    "bugs": {
+        "url": "https://github.com/AleksanderEvensen/nRPC/issues"
+    },
+    "homepage": "https://github.com/AleksanderEvensen/nRPC#readme",
+    "description": "A tRPC inspired callback library for the CitizenFX platform",
+    "repository": "git+https://github.com/AleksanderEvensen/nRPC.git",
     "scripts": {
         "build": "tsc",
         "watch": "tsc --watch"
