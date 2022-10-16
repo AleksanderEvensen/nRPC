@@ -1,0 +1,21 @@
+{
+    "include": ["./**/*"],
+    "exclude": ["**/node_modules"],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "noImplicitAny": false,
+        "module": "commonjs",
+        "target": "ES2018",
+        "allowJs": true,
+        "lib": ["ES2018"],
+        "types": ["@citizenfx/client", "@types/node"],
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "paths": {
+            "@server/*": ["../server/*"]
+        }
+    }
+}
